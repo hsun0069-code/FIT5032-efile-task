@@ -4,6 +4,10 @@ import AboutView from '../views/AboutView.vue'
 import LoginView from '@/views/LoginView.vue'
 import AccessDenied from '@/views/AccessDenied.vue'
 import isAuthenticated from '@/authenticate'
+import FirebaseSigninView from '@/views/FirebaseSigninView.vue'
+import FirebaseRegisterView from '@/views/FirebaseRegisterView.vue'
+import AddBookView from '@/views/AddBookView.vue'
+import BookList from '@/components/BookList.vue'
 
 const routes = [
     {
@@ -25,6 +29,26 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: LoginView
+    },
+    {
+        path: '/FireLogin',
+        name: 'FireLogin',
+        component: FirebaseSigninView
+    },
+    {
+        path: '/FireRegister',
+        name: 'FireRegister',
+        component: FirebaseRegisterView
+    },
+    {
+        path: '/addbook',
+        name: 'AddBook',
+        component: AddBookView
+    },
+    {
+        path: '/booklist',
+        name: 'BookList',
+        component: BookList
     }
 ]
 
@@ -34,9 +58,14 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    console.log('isAuthenticated', isAuthenticated.value)
     if (to.name === 'AccessDenied') {
         next()
-    } else if (to.name !== 'Login' && !isAuthenticated.value) next({ name: 'AccessDenied'})
+    } else if (
+        to.name !== 'Login' && 
+        to.name !== 'FireLogin' &&
+        to.name !== 'FireRegister' && 
+        !isAuthenticated.value) next({ name: 'AccessDenied'})
     else next()
 })
 
