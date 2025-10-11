@@ -31,7 +31,7 @@ const addBook = async () => {
             alert('ISBN must be a valid number');
             return;
         }
-
+        console.log('adding books: ', isbnNubmer + ''+ name.value);
         await addDoc(collection(db, 'books'), {
             isbn : isbnNubmer,
             name : name.value

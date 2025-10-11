@@ -8,6 +8,11 @@ import FirebaseSigninView from '@/views/FirebaseSigninView.vue'
 import FirebaseRegisterView from '@/views/FirebaseRegisterView.vue'
 import AddBookView from '@/views/AddBookView.vue'
 import BookList from '@/components/BookList.vue'
+import GetBookCountView from '@/views/GetBookCountView.vue'
+import AddBookAPIView from '@/views/AddBookAPIView.vue'
+import WeatherView from '@/views/WeatherView.vue'
+import CountBookAPI from '@/views/CountBookAPI.vue'
+import GetAllBookAPI from '@/views/GetAllBookAPI.vue'
 
 const routes = [
     {
@@ -49,6 +54,31 @@ const routes = [
         path: '/booklist',
         name: 'BookList',
         component: BookList
+    },
+    {
+        path: '/GetBookCount',
+        name: 'GetBookCount',
+        component: GetBookCountView
+    },
+    {
+        path: '/AddBookAPI',
+        name: 'AddBookAPI',
+        component: AddBookAPIView,
+    },
+    {
+        path: '/Weather',
+        name: 'Weather',
+        component: WeatherView,
+    },
+    {
+        path: '/CountBookAPI',
+        name: 'CountBookAPI',
+        component: CountBookAPI,
+    },
+    {
+        path: '/GetAllBookAPI',
+        name: 'GetAllBookAPI',
+        component: GetAllBookAPI,
     }
 ]
 
@@ -65,6 +95,7 @@ router.beforeEach((to, from, next) => {
         to.name !== 'Login' && 
         to.name !== 'FireLogin' &&
         to.name !== 'FireRegister' && 
+        to.name !== 'AddBook' &&
         !isAuthenticated.value) next({ name: 'AccessDenied'})
     else next()
 })
